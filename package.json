@@ -25,14 +25,14 @@
       "prettier --write"
     ],
     "*.ts?(x)": [
-      "eslint",
+      "eslint --fix",
       "prettier --write"
     ],
     "package.json": "npx sort-package-json"
   },
   "config": {
     "commitizen": {
-      "path": "@commitlint/cz-commitlint"
+      "path": "./node_modules/cz-customizable"
     }
   },
   "dependencies": {
@@ -58,6 +58,7 @@
     "@vitejs/plugin-react": "^1.3.2",
     "commitizen": "^4.2.4",
     "cypress": "^10.2.0",
+    "cz-customizable": "^7.4.0",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.1",
