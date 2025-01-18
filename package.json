@@ -1,16 +1,28 @@
 {
   "name": "react-ts-vite-template",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": {
     "name": "Fabien MARIE-LOUISE",
     "url": "https://github.com/fabien-ml"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/codermey-ui.es.js",
+      "require": "./dist/codermey-ui.umd.js"
+    }
+  },
+  "main": "./dist/codermey-ui.umd.js",
+  "module": "./dist/codermey-ui.es.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "npm run typecheck && vite build",
     "commit": "git-cz",
     "dev": "vite",
     "format": "prettier . --write --ignore-path .gitignore && git update-index --again",
-    "lint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore",
+    "lint:eslint": "eslint . --ext .ts,.tsx --fix --ignore-path .gitignore",
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{less,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
     "log": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "prepare": "husky install",
     "serve": "npm run build && vite preview --port 3000",
@@ -22,14 +34,21 @@
     "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.{css,md,json}": [
+    "*.{md,json}": [
       "prettier --write"
     ],
-    "*.ts?(x)": [
+    "*.{scss,less,css,styl,html}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "package.json": "npx sort-package-json"
+    "package.json": [
+      "prettier --write",
+      "npx sort-package-json"
+    ]
   },
   "config": {
     "commitizen": {
@@ -80,8 +99,15 @@
     "jest-environment-jsdom": "^28.1.1",
     "lint-staged": "^13.0.2",
     "prettier": "^2.7.1",
+    "sass": "^1.83.4",
     "sort-package-json": "^1.57.0",
     "start-server-and-test": "^1.14.0",
+    "stylelint": "^14.2.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^5.0.0",
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.4",
     "vite": "^2.9.12"
